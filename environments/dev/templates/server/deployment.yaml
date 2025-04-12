@@ -46,7 +46,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: server
-          image: "294405308722.dkr.ecr.us-east-1.amazonaws.com/simetrik-server:c7f6ddf"
+          image: "294405308722.dkr.ecr.us-east-1.amazonaws.com/simetrik-server:c76d313"
           imagePullPolicy: IfNotPresent
           ports:
             - name: grpc

@@ -1,0 +1,8 @@
+dashboard:
+  image:
+    repository: 294405308722.dkr.ecr.us-east-1.amazonaws.com/simetrik-dashboard
+    tag: c76d313
+server:
+  image:
+    repository: 294405308722.dkr.ecr.us-east-1.amazonaws.com/simetrik-server
+    tag: c76d313

@@ -1,7 +1,7 @@
 ---
 # Source: simetrik/templates/nodepools.yaml
-apiVersion: eks.amazonaws.com/v1
-kind: NodeClass
+apiVersion: karpenter.k8s.aws/v1beta1
+kind: EC2NodeClass
 metadata:
   name: default
   namespace: karpenter
@@ -73,6 +73,6 @@ spec:
           operator: In
           values: ["us-east-1a", "us-east-1b", "us-east-1c"]
       nodeClassRef:
-        apiGroup: eks.amazonaws.com
-        kind: NodeClass
+        kind: EC2NodeClass
+        group: karpenter.k8s.aws
         name: default

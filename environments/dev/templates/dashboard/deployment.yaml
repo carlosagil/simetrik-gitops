@@ -42,7 +42,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: dashboard
-          image: "294405308722.dkr.ecr.us-east-1.amazonaws.com/simetrik-dashboard:405bd74"
+          image: "294405308722.dkr.ecr.us-east-1.amazonaws.com/simetrik-dashboard:a999e63"
           imagePullPolicy: IfNotPresent
           ports:
             - name: grpc

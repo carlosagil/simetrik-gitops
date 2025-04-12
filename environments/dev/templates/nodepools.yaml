@@ -1,9 +1,10 @@
 ---
 # Source: simetrik/templates/nodepools.yaml
-apiVersion: karpenter.k8s.aws/v1beta1
+apiVersion: eks.amazonaws.com/v1
 kind: NodeClass
 metadata:
   name: default
+  namespace: simetrik
 spec:
   amiFamily: AL2
   blockDeviceMappings:
@@ -18,10 +19,11 @@ spec:
     karpenter.sh/discovery: "true"
 ---
 # Source: simetrik/templates/nodepools.yaml
-apiVersion: karpenter.k8s.aws/v1beta1
+apiVersion: karpenter.sh/v1
 kind: NodePool
 metadata:
   name: default
+  namespace: simetrik
 spec:
   disruption:
     consolidationPolicy: WhenUnderutilized

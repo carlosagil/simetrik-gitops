@@ -4,13 +4,13 @@ apiVersion: eks.amazonaws.com/v1
 kind: NodeClass
 metadata:
   name: default
-  namespace: simetrik
+  namespace: karpenter
 spec:
   amiFamily: AL2
   blockDeviceMappings:
     - deviceName: /dev/xvda
       ebs:
-        volumeSize: 50Gi
+        volumeSize: 20Gi
         volumeType: gp3
         deleteOnTermination: true
   subnetSelector:
@@ -23,10 +23,10 @@ apiVersion: karpenter.sh/v1
 kind: NodePool
 metadata:
   name: default
-  namespace: simetrik
+  namespace: karpenter
 spec:
   disruption:
-    consolidationPolicy: WhenUnderutilized
+    consolidationPolicy: WhenEmptyOrUnderutilized
     consolidateAfter: 30s
     expireAfter: 720h # Refresh nodes every 30 days
   limits:
@@ -41,15 +41,6 @@ spec:
         - key: "kubernetes.io/arch"
           operator: In
           values: ["amd64"]
-        - key: "karpenter.k8s.aws/instance-family"
-          operator: In
-          values: 
-            - c5
-            - m5
-            - r5
-            - c6i
-            - m6i
-            - r6i
         # Exclude less efficient instance families
         - key: "karpenter.k8s.aws/instance-family"
           operator: NotIn
@@ -82,4 +73,6 @@ spec:
           operator: In
           values: ["us-east-1a", "us-east-1b", "us-east-1c"]
       nodeClassRef:
+        apiGroup: eks.amazonaws.com
+        kind: NodeClass
         name: default

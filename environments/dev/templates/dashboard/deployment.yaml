@@ -27,7 +27,7 @@ spec:
       topologySpreadConstraints:
         - maxSkew: 1
           topologyKey: topology.kubernetes.io/zone
-          whenUnsatisfied: ScheduleAnyway
+          whenUnsatisfied: DoNotSchedule
           labelSelector:
             matchLabels:
               app.kubernetes.io/name: dashboard
@@ -42,7 +42,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: dashboard
-          image: "294405308722.dkr.ecr.us-east-1.amazonaws.com/simetrik-dashboard:a999e63"
+          image: "294405308722.dkr.ecr.us-east-1.amazonaws.com/simetrik-dashboard:9ea815d"
           imagePullPolicy: IfNotPresent
           ports:
             - name: grpc

@@ -1,8 +1,8 @@
 dashboard:
   image:
     repository: 294405308722.dkr.ecr.us-east-1.amazonaws.com/simetrik-dashboard
-    tag: 6669f91
+    tag: 1ba22b7
 server:
   image:
     repository: 294405308722.dkr.ecr.us-east-1.amazonaws.com/simetrik-server
-    tag: 6669f91
+    tag: 1ba22b7

@@ -1,8 +1,12 @@
 dashboard:
   image:
     repository: 294405308722.dkr.ecr.us-east-1.amazonaws.com/simetrik-dashboard
-    tag: 9ea815d
+    tag: a02f9e5
+  topologySpread:
+    whenUnsatisfied: DoNotSchedule
 server:
   image:
     repository: 294405308722.dkr.ecr.us-east-1.amazonaws.com/simetrik-server
-    tag: 9ea815d
+    tag: a02f9e5
+  topologySpread:
+    whenUnsatisfied: DoNotSchedule

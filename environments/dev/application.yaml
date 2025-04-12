@@ -15,6 +15,12 @@ spec:
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: simetrik
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
   syncPolicy:
     automated:
       prune: true

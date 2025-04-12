@@ -1,0 +1,96 @@
+---
+# Source: simetrik/templates/dashboard/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dashboard
+  labels:
+    helm.sh/chart: simetrik-0.1.0
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/instance: simetrik
+    app.kubernetes.io/name: dashboard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: dashboard
+      app.kubernetes.io/instance: simetrik
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: dashboard
+        app.kubernetes.io/instance: simetrik
+      annotations:
+        "karpenter.sh/do-not-evict": "false"
+    spec:
+      terminationGracePeriodSeconds: 30
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfied: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/name: dashboard
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/name: dashboard
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - name: dashboard
+          image: "294405308722.dkr.ecr.us-east-1.amazonaws.com/simetrik-dashboard:213c34d"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: grpc
+              containerPort: 50052
+              protocol: TCP
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+            - name: metrics
+              containerPort: 8080
+              protocol: TCP
+          env:
+            - name: SERVER_HOST
+              value: "server"
+            - name: SERVER_PORT
+              value: "50051"
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 200m
+              memory: 256Mi
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            failureThreshold: 30
+            periodSeconds: 10
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/sh", "-c", "sleep 10"]

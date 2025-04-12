@@ -1,0 +1,18 @@
+---
+# Source: simetrik/templates/dashboard/pdb.yaml
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: dashboard
+  labels:
+    helm.sh/chart: simetrik-0.1.0
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/instance: simetrik
+    app.kubernetes.io/name: dashboard
+spec:
+  # Ensure at least 50% of pods are available during disruptions
+  minAvailable: 50%
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: dashboard
+      app.kubernetes.io/instance: simetrik

@@ -1,0 +1,29 @@
+---
+# Source: simetrik/templates/dashboard/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: dashboard
+  labels:
+    helm.sh/chart: simetrik-0.1.0
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/instance: simetrik
+    app.kubernetes.io/name: dashboard
+spec:
+  type: ClusterIP
+  ports:
+    - port: 50052
+      targetPort: 50052
+      protocol: TCP
+      name: grpc
+    - port: 3000
+      targetPort: 3000
+      protocol: TCP
+      name: http
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+      name: metrics
+  selector:
+    app.kubernetes.io/name: dashboard
+    app.kubernetes.io/instance: simetrik

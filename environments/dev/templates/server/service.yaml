@@ -1,0 +1,21 @@
+---
+# Source: simetrik/templates/server/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: server
+  labels:
+    helm.sh/chart: simetrik-0.1.0
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/instance: simetrik
+    app.kubernetes.io/name: server
+spec:
+  type: ClusterIP
+  ports:
+    - port: 50051
+      targetPort: grpc
+      protocol: TCP
+      name: grpc
+  selector:
+    app.kubernetes.io/name: server
+    app.kubernetes.io/instance: simetrik

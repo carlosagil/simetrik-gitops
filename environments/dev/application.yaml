@@ -1,10 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: simetrik
+  name: simetrik-dev-us1
   namespace: argocd
 spec:
-  project: default
+  project: simetrik
   source:
     repoURL: 'https://github.com/carlosagil/simetrik-gitops.git'
     path: environments/dev

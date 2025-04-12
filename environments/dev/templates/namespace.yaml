@@ -1,0 +1,16 @@
+---
+# Source: simetrik/templates/namespace.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: simetrik
+  labels:
+    helm.sh/chart: simetrik-0.1.0
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/instance: simetrik
+    app.kubernetes.io/managed-by: helm
+    app.kubernetes.io/part-of: simetrik
+    app.kubernetes.io/version: "1.0"
+    environment: development
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"

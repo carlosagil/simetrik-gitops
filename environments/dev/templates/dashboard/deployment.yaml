@@ -42,7 +42,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: dashboard
-          image: "294405308722.dkr.ecr.us-east-1.amazonaws.com/simetrik-dashboard:a02f9e5"
+          image: "294405308722.dkr.ecr.us-east-1.amazonaws.com/simetrik-dashboard:5f2458e"
           imagePullPolicy: IfNotPresent
           ports:
             - name: grpc
@@ -58,7 +58,7 @@ spec:
             - name: SERVER_HOST
               value: "server"
             - name: SERVER_PORT
-              value: "50051"
+              value: ""
           resources:
             limits:
               cpu: 500m

@@ -46,11 +46,11 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: server
-          image: "294405308722.dkr.ecr.us-east-1.amazonaws.com/simetrik-server:a02f9e5"
+          image: "294405308722.dkr.ecr.us-east-1.amazonaws.com/simetrik-server:5f2458e"
           imagePullPolicy: IfNotPresent
           ports:
             - name: grpc
-              containerPort: 50051
+              containerPort: 
               protocol: TCP
           resources:
             limits:
@@ -62,13 +62,13 @@ spec:
           # Faster health checks for quicker pod replacement
           livenessProbe:
             tcpSocket:
-              port: 50051
+              port: 
             initialDelaySeconds: 5
             periodSeconds: 10
             timeoutSeconds: 5
           readinessProbe:
             tcpSocket:
-              port: 50051
+              port: 
             initialDelaySeconds: 5
             periodSeconds: 10
             timeoutSeconds: 5
